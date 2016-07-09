@@ -13,7 +13,7 @@ Public Class mntr_que
     Dim lablvcount As Integer = 0
     Dim conslvcount As Integer = 0
     Dim consscroll As Integer = 0
-    Dim audioFile As Video
+    'Dim audioFile As Video
     Dim playlistarr(0) As String
     Dim playlistcount As Integer = 0
     Dim duration As Integer = 0
@@ -30,29 +30,29 @@ Public Class mntr_que
         End If
     End Sub
 
-    Public Sub playlist()
-        playlistcount = 0
-        durcont = 0
-        countpl = 0
-        duration = 0
-        Dim select_query As String = "select playlist_path from playlist_tbl order by playlist_id"
-        Dim dt As New DataTable
-        If conn.SelectRec(select_query, dt) Then
-            If dt.Rows.Count >= 1 Then
-                countpl = dt.Rows.Count
-                ReDim playlistarr(dt.Rows.Count - 1)
-                For i As Integer = 0 To dt.Rows.Count - 1
-                    playlistarr(i) = dt.Rows(i).Item(0).ToString
-                Next
-                audioFile = New Video(playlistarr(playlistcount))
-                audioFile.Owner = Panel2
-                Panel2.Size = New Point(712, 540)
-                audioFile.Size = New Point(712, 540)
-                audioFile.Play()
-                duration = audioFile.Duration
-            End If
-        End If
-    End Sub
+    'Public Sub playlist()
+    '    playlistcount = 0
+    '    durcont = 0
+    '    countpl = 0
+    '    duration = 0
+    '    Dim select_query As String = "select playlist_path from playlist_tbl order by playlist_id"
+    '    Dim dt As New DataTable
+    '    If conn.SelectRec(select_query, dt) Then
+    '        If dt.Rows.Count >= 1 Then
+    '            countpl = dt.Rows.Count
+    '            ReDim playlistarr(dt.Rows.Count - 1)
+    '            For i As Integer = 0 To dt.Rows.Count - 1
+    '                playlistarr(i) = dt.Rows(i).Item(0).ToString
+    '            Next
+    '            audioFile = New Video(playlistarr(playlistcount))
+    '            audioFile.Owner = Panel2
+    '            Panel2.Size = New Point(712, 540)
+    '            audioFile.Size = New Point(712, 540)
+    '            audioFile.Play()
+    '            duration = audioFile.Duration
+    '        End If
+    '    End If
+    'End Sub
 
     'Sub onqueue()
     '    servicecont = 0
@@ -288,7 +288,7 @@ Public Class mntr_que
     End Sub
 
     Private Sub mntr_que_Disposed(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Disposed
-        audioFile.Stop()
+        'audioFile.Stop()
         Me.Dispose()
     End Sub
 
@@ -311,30 +311,30 @@ Public Class mntr_que
         tmrmarkee.Start()
     End Sub
 
-    Private Sub tmrqueue_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrqueue.Tick
-        lbltime.Text = DateTime.Now.ToLongTimeString
+    'Private Sub tmrqueue_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrqueue.Tick
+    '    lbltime.Text = DateTime.Now.ToLongTimeString
 
-        If countpl >= 1 Then
-            If duration + 2 < durcont Then
-                durcont = 0
-                playlistcount = playlistcount + 1
-                If playlistcount > playlistarr.Length - 1 Then
-                    playlistcount = 0
-                End If
-                audioFile.Stop()
-                audioFile.Dispose()
-                Panel2.Update()
-                audioFile = New Video(playlistarr(playlistcount))
-                audioFile.Owner = Panel2
-                Panel2.Size = New Point(712, 540)
-                audioFile.Size = New Point(712, 540)
-                audioFile.Play()
-                duration = audioFile.Duration
-            Else
-                durcont = durcont + 1
-            End If
-        End If
-    End Sub
+    '    If countpl >= 1 Then
+    '        If duration + 2 < durcont Then
+    '            durcont = 0
+    '            playlistcount = playlistcount + 1
+    '            If playlistcount > playlistarr.Length - 1 Then
+    '                playlistcount = 0
+    '            End If
+    '            audioFile.Stop()
+    '            audioFile.Dispose()
+    '            Panel2.Update()
+    '            audioFile = New Video(playlistarr(playlistcount))
+    '            audioFile.Owner = Panel2
+    '            Panel2.Size = New Point(712, 540)
+    '            audioFile.Size = New Point(712, 540)
+    '            audioFile.Play()
+    '            duration = audioFile.Duration
+    '        Else
+    '            durcont = durcont + 1
+    '        End If
+    '    End If
+    'End Sub
 
     Private Sub Tmrqueuelistscroll_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrqueuelistscroll.Tick
         If queuelvcount > 0 Then
@@ -408,7 +408,7 @@ Public Class mntr_que
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
         Try
             frm_playlist.Show()
-            audioFile.Dispose()
+            'audioFile.Dispose()
         Catch ex As Exception
 
         End Try
