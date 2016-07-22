@@ -30,6 +30,9 @@ Partial Class frm_uploadexcel
         Me.btnUpload = New System.Windows.Forms.Button
         Me.Button2 = New System.Windows.Forms.Button
         Me.lv_options = New System.Windows.Forms.ListView
+        Me.Label23 = New System.Windows.Forms.Label
+        Me.cmb_sheet = New System.Windows.Forms.ComboBox
+        Me.Button1 = New System.Windows.Forms.Button
         CType(Me.dt_tbl, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -105,6 +108,39 @@ Partial Class frm_uploadexcel
         Me.lv_options.TabIndex = 75
         Me.lv_options.UseCompatibleStateImageBehavior = False
         '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.BackColor = System.Drawing.Color.Transparent
+        Me.Label23.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label23.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label23.Location = New System.Drawing.Point(567, 39)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(117, 15)
+        Me.Label23.TabIndex = 169
+        Me.Label23.Text = "CHOOSE SHEET:"
+        '
+        'cmb_sheet
+        '
+        Me.cmb_sheet.Enabled = False
+        Me.cmb_sheet.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmb_sheet.FormattingEnabled = True
+        Me.cmb_sheet.Location = New System.Drawing.Point(690, 37)
+        Me.cmb_sheet.Name = "cmb_sheet"
+        Me.cmb_sheet.Size = New System.Drawing.Size(115, 23)
+        Me.cmb_sheet.TabIndex = 172
+        '
+        'Button1
+        '
+        Me.Button1.BackColor = System.Drawing.Color.Transparent
+        Me.Button1.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Button1.Location = New System.Drawing.Point(811, 39)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(90, 20)
+        Me.Button1.TabIndex = 173
+        Me.Button1.Text = "GENERATE"
+        Me.Button1.UseVisualStyleBackColor = False
+        '
         'frm_uploadexcel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -112,6 +148,9 @@ Partial Class frm_uploadexcel
         Me.BackgroundImage = Global.Health_Quest.My.Resources.Resources.bgMain
         Me.ClientSize = New System.Drawing.Size(1022, 469)
         Me.ControlBox = False
+        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.cmb_sheet)
+        Me.Controls.Add(Me.Label23)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.btnUpload)
         Me.Controls.Add(Me.dt_tbl)
@@ -134,4 +173,7 @@ Partial Class frm_uploadexcel
     Friend WithEvents btnUpload As System.Windows.Forms.Button
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents lv_options As System.Windows.Forms.ListView
+    Friend WithEvents Label23 As System.Windows.Forms.Label
+    Friend WithEvents cmb_sheet As System.Windows.Forms.ComboBox
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 End Class

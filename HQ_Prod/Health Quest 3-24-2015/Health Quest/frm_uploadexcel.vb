@@ -1,4 +1,8 @@
 ﻿Imports System.IO
+Imports Excel = Microsoft.Office.Interop.Excel
+Imports System.Data.OleDb
+Imports Microsoft.Office.Interop.Excel
+
 
 Public Class frm_uploadexcel
     Dim conn As New HQ_Connection
@@ -20,7 +24,7 @@ Public Class frm_uploadexcel
     End Sub
 
     Sub getQuery()
-        query.Add("patient_tbl", "SELECT patient_number as 'Patient number', lname as 'Last Name', fname as 'First name', mname as 'Middle name', bday as 'Birth date', age as 'Age', gender as 'Gender', address as 'Address', tel as 'Telephone', mob as 'Mobile #', email as 'Email add' from patient_tbl limit 0")
+        query.Add("patient_tbl", "SELECT patient_number as 'Patient number', lname as 'Last name', fname as 'First name', mname as 'Middle name', bday as 'Birth date', age as 'Age', gender as 'Gender', address as 'Address', tel as 'Telephone', mob as 'Mobile #', email as 'Email add' from patient_tbl limit 0")
     End Sub
 
     Sub popList(ByVal tablearr() As String, ByVal tablename() As String)
@@ -68,12 +72,78 @@ Public Class frm_uploadexcel
     Private Sub OpenFileDialog1_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles OpenFileDialog1.FileOk
         Dim file As String = OpenFileDialog1.FileName.ToString
         TextBox1.Text = file
-        populateGrid(file)
+        cmb_sheet.Enabled = True
+        populateCmb(file)
         btnUpload.Enabled = True
     End Sub
 
-    Sub populateGrid(ByVal file As String)
+    Sub populateGrid(ByVal file As String, ByVal sheet As String)
+        Dim xlApp As Excel.Application
+        Dim xlWorkBook As Excel.Workbook
+        Dim xlWorkSheet As Excel.Worksheet
 
+        xlApp = New Excel.ApplicationClass
+        xlWorkBook = xlApp.Workbooks.Open(file)
+        xlWorkSheet = xlWorkBook.Worksheets(sheet)
+
+        'xlWorkSheet.Cells(row, column).value()
+        Dim rows As Long = xlWorkSheet.UsedRange.Rows.Count
+        Dim cols As Long = xlWorkSheet.UsedRange.Columns.Count
+
+        Dim dt As System.Data.DataTable = New System.Data.DataTable
+        For Each col As DataGridViewColumn In dt_tbl.Columns
+            dt.Columns.Add(col.HeaderText)
+        Next
+
+        For temprows As Integer = 1 To rows - 1
+            dt.Rows.Add()
+        Next
+        dt_tbl.DataSource = dt
+
+        For i As Integer = 1 To cols - 1
+            Dim columnName As String = xlWorkSheet.Cells(1, i).value
+            For Each col As DataGridViewColumn In dt_tbl.Columns
+                If col.HeaderText = columnName Then
+                    For j As Integer = 2 To rows
+                        Dim data As String = xlWorkSheet.Cells(j, i).value()
+                        dt_tbl.Rows(j - 2).Cells(i - 1).Value = data
+                    Next
+                    GoTo end_loop_2
+                End If
+            Next
+end_loop_2:
+        Next
+
+        releaseObject(xlApp)
+        releaseObject(xlWorkBook)
+        releaseObject(xlWorkSheet)
+    End Sub
+
+    Sub populateCmb(ByVal file As String)
+        Dim xlApp As Excel.Application
+        Dim xlWorkBook As Excel.Workbook
+
+        xlApp = New Excel.ApplicationClass
+        xlWorkBook = xlApp.Workbooks.Open(file)
+
+        Dim listSheet As New List(Of String)
+        For Each sht As Worksheet In xlWorkBook.Worksheets
+            cmb_sheet.Items.Add(sht.Name)
+        Next
+
+        releaseObject(xlApp)
+        releaseObject(xlWorkBook)
+    End Sub
+
+    Private Sub releaseObject(ByVal obj As Object)
+        Try
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(obj)
+            obj = Nothing
+        Catch ex As Exception
+            obj = Nothing
+        Finally
+            GC.Collect()
+        End Try
     End Sub
 
     Private Sub lv_options_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lv_options.SelectedIndexChanged
@@ -91,5 +161,11 @@ Public Class frm_uploadexcel
             da.Fill(ds)
             dt_tbl.DataSource = ds.Tables(0)
         End If
+    End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        Dim file As String = TextBox1.Text
+        Dim sheet As String = cmb_sheet.SelectedItem.ToString
+        populateGrid(file, sheet)
     End Sub
 End Class
