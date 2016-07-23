@@ -220,6 +220,7 @@
 
     Private Sub cmb_service_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmb_service.SelectedIndexChanged
         servid = serv(cmb_service.SelectedIndex)
+        frm_queueitem.servid = servid
         search_lv_serv()
     End Sub
 
@@ -357,7 +358,6 @@
                     txtdoc.Text = ""
                 End If
             End If
-            identifynext_cons()
         End If
     End Sub
 

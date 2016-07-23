@@ -37,6 +37,7 @@ Partial Class MDI_Administrator
         Me.Button7 = New System.Windows.Forms.Button
         Me.Button6 = New System.Windows.Forms.Button
         Me.PanelMonitoring = New System.Windows.Forms.Panel
+        Me.Button17 = New System.Windows.Forms.Button
         Me.Button10 = New System.Windows.Forms.Button
         Me.Button26 = New System.Windows.Forms.Button
         Me.Button13 = New System.Windows.Forms.Button
@@ -50,7 +51,6 @@ Partial Class MDI_Administrator
         Me.Button22 = New System.Windows.Forms.Button
         Me.Button23 = New System.Windows.Forms.Button
         Me.Button24 = New System.Windows.Forms.Button
-        Me.Button17 = New System.Windows.Forms.Button
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelMaintenance.SuspendLayout()
         Me.PanelMonitoring.SuspendLayout()
@@ -147,7 +147,7 @@ Partial Class MDI_Administrator
         Me.Button8.Name = "Button8"
         Me.Button8.Size = New System.Drawing.Size(191, 45)
         Me.Button8.TabIndex = 47
-        Me.Button8.Text = "WHAT IS THIS"
+        Me.Button8.Text = "CONSUMABLES"
         Me.Button8.UseVisualStyleBackColor = False
         '
         'Button27
@@ -269,6 +269,19 @@ Partial Class MDI_Administrator
         Me.PanelMonitoring.Size = New System.Drawing.Size(198, 425)
         Me.PanelMonitoring.TabIndex = 36
         Me.PanelMonitoring.Visible = False
+        '
+        'Button17
+        '
+        Me.Button17.BackColor = System.Drawing.Color.Transparent
+        Me.Button17.BackgroundImage = CType(resources.GetObject("Button17.BackgroundImage"), System.Drawing.Image)
+        Me.Button17.Font = New System.Drawing.Font("Sylfaen", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button17.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Button17.Location = New System.Drawing.Point(4, 105)
+        Me.Button17.Name = "Button17"
+        Me.Button17.Size = New System.Drawing.Size(191, 50)
+        Me.Button17.TabIndex = 44
+        Me.Button17.Text = "HMO PRICE SETTING"
+        Me.Button17.UseVisualStyleBackColor = False
         '
         'Button10
         '
@@ -440,19 +453,6 @@ Partial Class MDI_Administrator
         Me.Button24.TabIndex = 36
         Me.Button24.Text = "DOCTOR'S MONITORING"
         Me.Button24.UseVisualStyleBackColor = False
-        '
-        'Button17
-        '
-        Me.Button17.BackColor = System.Drawing.Color.Transparent
-        Me.Button17.BackgroundImage = CType(resources.GetObject("Button17.BackgroundImage"), System.Drawing.Image)
-        Me.Button17.Font = New System.Drawing.Font("Sylfaen", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button17.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Button17.Location = New System.Drawing.Point(4, 105)
-        Me.Button17.Name = "Button17"
-        Me.Button17.Size = New System.Drawing.Size(191, 50)
-        Me.Button17.TabIndex = 44
-        Me.Button17.Text = "HMO PRICE SETTING"
-        Me.Button17.UseVisualStyleBackColor = False
         '
         'MDI_Administrator
         '

@@ -59,10 +59,33 @@ Public Class frm_serviceType
             edit_query = "update service_type_tbl set stype_class = '" & service_class & "', stype_name = '" + txtSname.Text + "', scat_id = '" + stvar + "' where stype_id = '" + txtSID.Text + "'"
         End If
         If conn.ModRec(edit_query) = True Then
-            MessageBox.Show("Record(s) Update Successful", "Message ", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
             If base = True Then
 
+                Dim select_query As String
+                Dim dt As New DataTable
+                select_query = "SELECT stype_id FROM service_type_tbl ORDER BY stype_id DESC LIMIT 1"
+                If conn.SelectRec(select_query, dt) = True Then
+                    serv_id = dt.Rows(0).Item(0).ToString
+
+                    Dim retrieve_hmos As String
+                    Dim dt_hmos As New DataTable
+                    retrieve_hmos = "select Record_ID from hmo_tbl"
+                    If conn.SelectRec(retrieve_hmos, dt_hmos) = True Then
+                        For i As Integer = 0 To (dt_hmos.Rows.Count - 1)
+                            hmo_id = dt_hmos.Rows(i).Item(0).ToString
+
+                            add_query = "insert into hmo_serv_tbl values(null,'" & hmo_id & "','" & serv_id & "','0.00','0.00','0.00')"
+                            If conn.ModRec(add_query) = True Then
+                            End If
+
+                        Next
+                    End If
+                    dt_hmos.Dispose()
+                End If
+                dt.Dispose()
             End If
+            MessageBox.Show("Record(s) Update Successful", "Message ", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Call form()
         End If
     End Sub

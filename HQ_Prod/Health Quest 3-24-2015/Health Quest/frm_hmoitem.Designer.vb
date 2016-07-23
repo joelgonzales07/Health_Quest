@@ -223,6 +223,7 @@ Partial Class frm_hmoitem
         'lv_regular
         '
         Me.lv_regular.Location = New System.Drawing.Point(224, 83)
+        Me.lv_regular.MultiSelect = False
         Me.lv_regular.Name = "lv_regular"
         Me.lv_regular.Size = New System.Drawing.Size(660, 292)
         Me.lv_regular.TabIndex = 60

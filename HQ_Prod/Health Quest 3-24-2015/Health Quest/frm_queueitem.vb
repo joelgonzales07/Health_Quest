@@ -1,7 +1,7 @@
 ﻿Imports System.IO
 Public Class frm_queueitem
     Dim conn As New HQ_Connection
-    Dim servid As String = frm_queue.servid
+    Public servid As String = ""
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         Me.Dispose()
     End Sub
@@ -45,11 +45,8 @@ Public Class frm_queueitem
         For i As Integer = 0 To dt_items.Rows.Count - 1
             Dim mod_query As String = "update inventory_tbl set quantity = '" + dt_items.Rows(i).Cells("New stock level").Value.ToString + "' where item_id = '" + dt_items.Rows(i).Cells("id").Value.ToString + "'"
             If conn.ModRec(mod_query) Then
-                MessageBox.Show("Inventory successfully updated.", "Message ", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Else
-                MessageBox.Show("No changes made for the inventory.", "Message ", MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
-            Me.Dispose()
         Next
+        MessageBox.Show("Inventory successfully updated.", "Message ", MessageBoxButtons.OK, MessageBoxIcon.Information)
     End Sub
 End Class

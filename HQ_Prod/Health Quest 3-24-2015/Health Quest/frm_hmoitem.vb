@@ -204,15 +204,15 @@ Public Class frm_hmoitem
     End Sub
 
     Private Sub btnImport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImport.Click
-        userchoice = MsgBox("This button will import the Gross, Vat and Net from the original price you set. However, it will replace any changes you made." & vbCrLf & vbCrLf & "Do you wish to import?", MsgBoxStyle.YesNo, "Notification")
+        userchoice = MsgBox("This feature will import the Gross, Vat and Net from the original price you set. However, it will replace any changes you made." & vbCrLf & vbCrLf & "Do you wish to import?", MsgBoxStyle.YesNo, "Notification")
 
         If userchoice = DialogResult.Yes Then
-
             Dim dt As New DataTable
             Dim select_query As String = "select stype_id, service_gross, service_vat, service_net from service_price_tbl"
             If conn.SelectRec(select_query, dt) = True Then
                 If dt.Rows.Count > 0 Then
-                    For i = 0 To 3
+                    For i = 0 To dt.Rows.Count - 1
+
                         stype_id = dt.Rows(i).Item(0).ToString()
                         serv_gross = dt.Rows(i).Item(1).ToString()
                         serv_vat = dt.Rows(i).Item(2).ToString()
